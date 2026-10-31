@@ -1,0 +1,110 @@
+{
+  "info": {
+    "name": "Assignment 6 - Student Records REST API",
+    "description": "Set baseUrl. Create a record and copy response data._id into studentId before ID-based tests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "studentId",
+      "value": "PASTE_CREATED_STUDENT_ID_HERE"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Student (201)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Aarav Mehta\",\n  \"email\": \"aarav@example.com\",\n  \"prn\": \"202401040021\",\n  \"mobile\": \"9876543210\",\n  \"course\": \"B.Tech\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Create Student - Invalid Data (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"A\",\n  \"email\": \"bad\",\n  \"prn\": \"123\",\n  \"mobile\": \"123\",\n  \"course\": \"Unknown\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get All Students (200)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/students"
+      }
+    },
+    {
+      "name": "Get Student by ID (200)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/students/{{studentId}}"
+      }
+    },
+    {
+      "name": "Get Student - Invalid ID (400)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/students/not-a-valid-id"
+      }
+    },
+    {
+      "name": "Update Student (200)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/{{studentId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Aarav Mehta Updated\",\n  \"email\": \"aarav.updated@example.com\",\n  \"prn\": \"202401040021\",\n  \"mobile\": \"9876543210\",\n  \"course\": \"B.Tech\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Delete Student (200)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/students/{{studentId}}"
+      }
+    },
+    {
+      "name": "Get Missing Student (404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/students/65b000000000000000000000"
+      }
+    }
+  ]
+}
